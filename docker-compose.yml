@@ -1,0 +1,27 @@
+services:
+    webserver:
+        build: .
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db # this will start database before webserver (probably could just do a async fetch but idk)
+        volumes:
+            - .:/usr/src/app # bind mount to sync local files with the container (app dir is put into the dockers dir @ /src/app)
+        environment:
+            - NODE_ENV=development
+
+    # so we dont actually need to run a linux distro because the node image does that for us (i think like debian or something)
+
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: ledatabase
+            POSTGRES_USER: gorg
+            POSTGRES_PASSWORD: yeah
+        ports:
+            - "5432:5432"
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
+volumes:
+    db_data:
