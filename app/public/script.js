@@ -29,16 +29,18 @@ const initGlitch = () => {
 		img.style.left = `${x}px`;
 		img.style.top = `${y}px`;
 	};
-};
-
-const easein = (() => {
-	let num = 20;
-	const interval = 1000 / num; // doesnt really seem to be 1 second :|
-	for (let i = 0; i < num; i++) {
-		setTimeout(() => initGlitch(), i * interval);
+	const randomInt = Math.floor(Math.random() * 4) - 1;
+	if (randomInt) {
+		easein(() => {
+			img.style.filter = "grayscale(100%)";
+		}, 1);
 	}
-})(); // IIFE
+}; // what the skibib
 
-// for (let i = 0; i < 8; i++) {
-// 	initGlitch();
-// }
+const easein = (func, num) => {
+	const interval = 1000 / num; // doesnt really seem to be 1 second :p
+	for (let i = 1; i <= num; i++) {
+		setTimeout(() => func(), i * interval);
+	}
+};
+easein(initGlitch, 22); // #ihateobjects :)
