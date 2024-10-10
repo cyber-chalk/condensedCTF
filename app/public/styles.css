@@ -2,12 +2,18 @@
     --move: translate(-50%, -50%)
 }
 
+/* 
+@font-face {
+    font-family: 'Rajdhani';
+    src: url(./fonts/Rajdhani-Regular.ttf);
+} */
+
 body {
     font-family: 'Rajdhani';
-    /* font-weight: SemiBold; */
     background-color: rgb(0, 0, 0);
     height: 100vh;
     width: 100vw;
+    color: #EF2E37;
     margin: 0 0;
     overflow: hidden;
     /* normal: 500-400
@@ -20,6 +26,7 @@ body {
 /* i want hover on download container where it lesserns the opacity around cursor */
 /* you could animate the secondary information feild where she pulls the cable out of (maybe leave to end) #f696db  */
 /* the infomation boxes have drop shadows */
+/*  https: //codepen.io/mattgrosswork/pen/VwprebG?editors=1100 */
 #download-container {
     display: none;
     /* remove l8er */
@@ -63,33 +70,74 @@ body {
 }
 
 
+/* #cable-container {} */
 
-@keyframes glitchBefore {
-    0% {
-        transform: inherit translate(0, 0);
-    }
-
-    50% {
-        transform: inherit translate(-5px, -5px);
-    }
-
-    100% {
-        transform: inherit translate(0, 0);
-    }
+.hidden {
+    display: none;
 }
 
-@keyframes glitchAfter {
+#cable-container img {
+    transform-origin: center;
+    position: relative;
+    top: 25vh;
+    width: 130vw;
+    transform: translate(-100vw, 0px);
+    animation: pull 0.9s forwards;
+    float: right;
+}
+
+#input-container2 {
+    position: absolute;
+    left: 50%;
+    top: 24vh;
+    transform: translate(-50%, -50%);
+    background-color: rgba(239,
+            46,
+            55, 10.67%);
+    border-style: solid;
+    border-color: #EF2E37;
+    padding: 1vw 3vw;
+    text-align: center;
+    border-width: 2px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: flex; */
+}
+
+/* #input-container2 h3 {
+    font-weight: 500;
+    margin: 0.9rem;
+    font-size: 1.5rem;
+} */
+
+#input-container2 input {
+    color: #EF2E37;
+    border-style: solid;
+    border-color: #EF2E37;
+    background-color: rgba(239,
+            46,
+            55, 10.67%);
+    outline: none;
+}
+
+@keyframes pull {
     0% {
-        transform: inherit translate(0, 0);
+        transform: translate(-100vw, 0)
     }
 
-    50% {
-        transform: inherit translate(5px, 5px);
+    /* 85% {
+        transform: translate(0vw, 0px);
+    } */
+
+    90% {
+        transform: translate(20px, 0px);
     }
 
     100% {
-        transform: translate(0, 0);
+        transform: translate(0px, 0px);
     }
+
 }
 
 @keyframes glitch {

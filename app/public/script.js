@@ -31,16 +31,38 @@ const initGlitch = () => {
 	};
 	const randomInt = Math.floor(Math.random() * 4) - 1;
 	if (randomInt) {
-		easein(() => {
-			img.style.filter = "grayscale(100%)";
-		}, 1);
+		easein(
+			() => {
+				img.style.filter = "grayscale(100%)";
+			},
+			1,
+			1500
+		);
 	}
 }; // what the skibib
 
-const easein = (func, num) => {
-	const interval = 1000 / num; // doesnt really seem to be 1 second :p
+const easein = (func, num, time) => {
+	const interval = time / num; // doesnt really seem to be 1 second :p
 	for (let i = 1; i <= num; i++) {
 		setTimeout(() => func(), i * interval);
 	}
 };
-easein(initGlitch, 22); // #ihateobjects :)
+
+const process = () => {
+	easein(initGlitch, 22, 1000); // #ihateobjects :)
+	setTimeout(() => {
+		console.log("Enemy spy is in the base, protect the brief case!");
+		// document.body.querySelectorAll("*").forEach((element) => {
+		// 	element.style.display = "none";
+		// });
+		document.body.querySelectorAll(".layers").forEach((element) => {
+			element.remove();
+		});
+		[...document.body.getElementsByClassName("hidden")].forEach(
+			(element) => {
+				element.classList.remove("hidden");
+			}
+		);
+	}, 3000);
+};
+process();
