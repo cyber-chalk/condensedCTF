@@ -66,3 +66,27 @@ const process = () => {
 	}, 3000);
 };
 process();
+
+function sends(element) {
+	console.log(element);
+	// element.style.animation = "none";
+	element.classList.add("animate-pull2");
+
+	element.addEventListener(
+		"animationend",
+		() => {
+			element.classList.remove("animate-pull2");
+			// send stuff to server/database
+
+			// if not gained access make a console.log
+			if (!1) return;
+			// if gained access (write stuff here)
+			for (let i = 0; i < 4; i++) {
+				[...document.getElementsByTagName("div")][i].style.display =
+					"none";
+				// Warning, if its not 4 it could break
+			}
+		},
+		{ once: true }
+	); // { once: true } ensures this event listener is removed after it runs once
+}

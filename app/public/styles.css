@@ -83,7 +83,9 @@ body {
     width: 130vw;
     transform: translate(-100vw, 0px);
     animation: pull 0.9s forwards;
+    /* animation: pull 0.5s ease-out forwards; */
     float: right;
+    cursor: pointer;
 }
 
 #input-container2 {
@@ -138,6 +140,21 @@ body {
         transform: translate(0px, 0px);
     }
 
+}
+
+.animate-pull2 {
+    animation: pull2 0.5s forwards !important;
+    /* kind of not good (try to remove important) */
+}
+
+@keyframes pull2 {
+    0% {
+        transform: none;
+    }
+
+    100% {
+        transform: translate(20vw, 0px);
+    }
 }
 
 @keyframes glitch {
