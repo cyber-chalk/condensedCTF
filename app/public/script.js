@@ -65,7 +65,7 @@ const process = () => {
 		);
 	}, 3000);
 };
-process();
+// process();
 
 function sends(element) {
 	console.log(element);
@@ -81,12 +81,25 @@ function sends(element) {
 			// if not gained access make a console.log
 			if (!1) return;
 			// if gained access (write stuff here)
-			for (let i = 0; i < 4; i++) {
-				[...document.getElementsByTagName("div")][i].style.display =
-					"none";
-				// Warning, if its not 4 it could break
+			let divArr = [...document.getElementsByTagName("div")];
+			for (let i = 0; i < divArr.length; i++) {
+				divArr[i].style.display = "none";
 			}
+			loading();
 		},
 		{ once: true }
 	); // { once: true } ensures this event listener is removed after it runs once
 }
+
+const loading = () => {
+	let element = document.getElementById("loading-container");
+	element.style.display = "flex";
+	document
+		.getElementById("progress-bar")
+		.addEventListener("animationend", () => {
+			element.style.display = "none";
+		});
+};
+
+const data = () => {};
+// loading();

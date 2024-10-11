@@ -2,12 +2,6 @@
     --move: translate(-50%, -50%)
 }
 
-/* 
-@font-face {
-    font-family: 'Rajdhani';
-    src: url(./fonts/Rajdhani-Regular.ttf);
-} */
-
 body {
     font-family: 'Rajdhani';
     background-color: rgb(0, 0, 0);
@@ -107,11 +101,14 @@ body {
     flex-wrap: flex; */
 }
 
+
+
+
 /* #input-container2 h3 {
     font-weight: 500;
     margin: 0.9rem;
     font-size: 1.5rem;
-} */
+} if you want text in the input box*/
 
 #input-container2 input {
     color: #EF2E37;
@@ -122,6 +119,33 @@ body {
             55, 10.67%);
     outline: none;
 }
+
+#loading-container {
+    display: flex;
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+#loading-container img {
+    width: 40vw;
+    z-index: -1;
+}
+
+#loading-container svg {
+    /* width: 464.511px; */
+    width: 40vw;
+    height: 8.5vw;
+    position: absolute;
+}
+
+#loading-container svg rect {
+    animation: glitchyWidth 1s ease-in forwards;
+}
+
 
 @keyframes pull {
     0% {
@@ -143,7 +167,7 @@ body {
 }
 
 .animate-pull2 {
-    animation: pull2 0.5s forwards !important;
+    animation: pull2 0.5s forwards ease-out !important;
     /* kind of not good (try to remove important) */
 }
 
@@ -156,6 +180,18 @@ body {
         transform: translate(20vw, 0px);
     }
 }
+
+
+@keyframes glitchyWidth {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
 
 @keyframes glitch {
     0% {
