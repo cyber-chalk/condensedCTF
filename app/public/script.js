@@ -1,3 +1,11 @@
+const sendAdmin = (element) => {
+	element.src = "./images/clicked.svg";
+	setTimeout(() => {
+		document.getElementById("download-container").style.display = "none";
+		process();
+	}, 250);
+};
+
 function randomGaussian(mean, stddev) {
 	let u = 1 - Math.random();
 	let v = 1 - Math.random();
@@ -98,8 +106,13 @@ const loading = () => {
 		.getElementById("progress-bar")
 		.addEventListener("animationend", () => {
 			element.style.display = "none";
+			data();
 		});
 };
 
-const data = () => {};
+const data = () => {
+	document.getElementById("final-container").style.display = "flex";
+	document.getElementById("final-text").style.display = "flex";
+};
+
 // loading();
