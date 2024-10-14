@@ -47,7 +47,7 @@ const initGlitch = () => {
 			1500
 		);
 	}
-}; // what the skibib
+};
 
 const easein = (func, num, time) => {
 	const interval = time / num; // doesnt really seem to be 1 second :p
@@ -63,14 +63,25 @@ const process = () => {
 		// document.body.querySelectorAll("*").forEach((element) => {
 		// 	element.style.display = "none";
 		// });
-		document.body.querySelectorAll(".layers").forEach((element) => {
-			element.remove();
-		});
+		document.body
+			.querySelectorAll(".layers")
+			.forEach((element) => element.remove());
+
+		const panel = document.getElementById("input-container2");
+		const cable = document.getElementById("cable");
+
 		[...document.body.getElementsByClassName("hidden")].forEach(
 			(element) => {
+				if (element == panel) {
+					cable.addEventListener("animationend", () => {
+						panel.classList.remove("hidden");
+					});
+					return; // return acts as continue since its a foreach
+				}
+
 				element.classList.remove("hidden");
 			}
-		);
+		); // kind of yucky
 	}, 3000);
 };
 // process();
