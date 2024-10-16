@@ -27,9 +27,9 @@ def login():
     username = request.form['username']
     password = request.form['password']
     
-    # Vulnerable SQL query (SQL Injection)
     connection = get_db_connection()
     cursor = connection.cursor()
+    # Statement below is where the SQL injection comes into play. 
     query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
     cursor.execute(query)
     

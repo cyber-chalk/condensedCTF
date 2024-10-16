@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"  # Expose Flask app on port 5000
+      - "5000:5000"  # open flask(python webserver) on port 5000
     depends_on:
       - db
     environment:
