@@ -1,10 +1,11 @@
 services:
-    webserver:
+    web:
         build: .
         ports:
             - "8080:8080"
         depends_on:
-            - db # this will start database before webserver (probably could just do a async fetch but idk)
+            - db
+            # this will start database before webserver (probably could just do a async fetch but idk)
         volumes:
             - .:/usr/src/app # bind mount to sync local files with the container (app dir is put into the dockers dir @ /src/app)
         environment:
@@ -12,16 +13,26 @@ services:
 
     # so we dont actually need to run a linux distro because the node image does that for us (i think like debian or something)
 
+    # db:
+    #     image: postgres:latest
+    #     environment:
+    #         POSTGRES_DB: ledatabase
+    #         POSTGRES_USER: gorg
+    #         POSTGRES_PASSWORD: yeah
+    #     ports:
+    #         - "5432:5432"
+    #     volumes:
+    #         - db_data:/var/lib/postgresql/data
     db:
-        image: postgres:latest
+        image: mysql:5.7
+        # restart: always
         environment:
-            POSTGRES_DB: ledatabase
-            POSTGRES_USER: gorg
-            POSTGRES_PASSWORD: yeah
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: ctf_db
         ports:
-            - "5432:5432"
+            - "3306:3306"
         volumes:
-            - db_data:/var/lib/postgresql/data
+            - ./sql:/docker-entrypoint-initdb.d/ # Mount for initial DB setup scripts
 
-volumes:
-    db_data:
+# volumes:
+#     db_data:
