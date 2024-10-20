@@ -86,20 +86,31 @@ const process = () => {
 };
 // process();
 
-function sends(element) {
+async function sends(element) {
 	console.log(element);
 	// element.style.animation = "none";
 	element.classList.add("animate-pull2");
+	let inputs = document.querySelectorAll("input");
+	let response = await fetch("/login", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json" // can also use 'application/x-www-form-urlencoded'
+		},
+		body: JSON.stringify({
+			username: inputs[0].value,
+			password: inputs[1].value
+		})
+	});
+	const result = await response;
+	if (result.error) return console.log(result.error);
 
 	element.addEventListener(
 		"animationend",
 		() => {
 			element.classList.remove("animate-pull2");
-			// send stuff to server/database
 
-			// if not gained access make a console.log
-			if (!1) return;
-			// if gained access (write stuff here)
+			if (!result.success) return;
+
 			let divArr = [...document.getElementsByTagName("div")];
 			for (let i = 0; i < divArr.length; i++) {
 				divArr[i].style.display = "none";

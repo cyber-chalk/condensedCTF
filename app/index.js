@@ -1,9 +1,7 @@
 const express = require("express");
 const mysql = require("mysql2");
-// const { Pool } = require("pg"); // postgres client
 const app = express();
 const Port = 8080;
-// app.use(express.static("public"));
 // middleware for parsing form data
 app.use(express.urlencoded({ extended: true }));
 // Set up PostgreSQL connection
@@ -15,12 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 // 	port: 5432
 // });
 
-// const db = mysql.createConnection({
-// 	host: "db", // 'db' service name in docker-compose.yml
-// 	user: "root",
-// 	password: "rootpassword",
-// 	database: "ctf_db"
-// });
 const createConnection = () => {
 	return mysql.createConnection({
 		host: "db", // Use the service name defined in docker-compose
@@ -30,37 +22,20 @@ const createConnection = () => {
 	});
 };
 
-// Retry connecting to the database
-const connectWithRetry = (retries = 5) => {
-	const connection = createConnection();
-
-	connection.connect((err) => {
-		if (err) {
-			if (retries > 0) {
-				console.log(
-					`Retrying database connection... (${5 - retries + 1})`
-				);
-				setTimeout(() => connectWithRetry(retries - 1), 2000); // Wait 2 seconds before retrying
-			} else {
-				console.error("Could not connect to database:", err);
-				process.exit(1);
-			}
-		} else {
-			console.log("Connected to database.");
-		}
-	});
-
-	return connection;
-};
-
-app.get("/", (req, res) => {
-	res.send(`
-    <form method="POST" action="/login">
-      Username: <input type="text" name="username"><br>
-      Password: <input type="password" name="password"><br>
-      <input type="submit" value="Login">
-    </form>
-  `);
+// app.get("/", (req, res) => {
+// 	res.send(`
+//     <form method="POST" action="/login">
+//       Username: <input type="text" name="username"><br>
+//       Password: <input type="password" name="password"><br>
+//       <input type="submit" value="Login">
+//     </form>
+//   `);
+// });
+app.get("/*", (req, res) => {
+	if (req.path === "/") {
+		return res.sendFile(`/usr/src/app/app/public/index.html`);
+	}
+	res.sendFile(`/usr/src/app/app/public/${req.path}`);
 });
 
 app.post("/login", (req, res) => {
@@ -73,13 +48,17 @@ app.post("/login", (req, res) => {
 	connection.query(query, (err, results) => {
 		if (err) {
 			console.error(err);
-			return res.status(500).send("yup, err " + err);
+			return res
+				.status(500)
+				.json({ success: false, message: "yup error ", error: err });
 		}
 
 		if (results.length > 0) {
-			res.send(`Welcome, ${username}!`);
+			res.json({ success: true });
 		} else {
-			res.status(401).send("Invalid credentials!");
+			res.status(200).json({
+				success: false
+			}); // have to send 200 otherwise browser throws err
 		}
 	});
 });
