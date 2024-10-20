@@ -1,1 +1,67 @@
-hi :)
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="./script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Deep Dive 🛁</title>
+	</head>
+	<body>
+		<div id="download-container">
+			<img
+				src="./images/Download-base.svg"
+				onclick="sendAdmin(this)"
+				id="btn"
+				alt=""
+			/>
+			<img src="./images/container.svg" id="down-svg" alt="" />
+			<!-- add more later (so can send stuf) -->
+
+			<!-- <div id="overlay">hi</div> -->
+		</div>
+
+		<div
+			id="cable-container"
+			onclick="sends(this.children[0])"
+			class="hidden"
+		>
+			<img src="./images/cable.svg" id="cable" alt="" />
+		</div>
+		<div id="input-container2" class="hidden">
+			<!-- <h3>Input Required Data:</h3> -->
+			<input type="text" style="font-family: 'Rajdhani'" name="name" />
+			<input
+				type="text"
+				style="font-family: 'Rajdhani'"
+				name="password"
+			/>
+		</div>
+		<!-- <img src="./images/Error.svg" class="layers" alt="" /> -->
+		<div id="loading-container">
+			<img src="./images/download-percent.svg" id="bar" alt="" />
+			<svg>
+				<rect
+					id="progress-bar"
+					y="1vw"
+					width="40vw"
+					height="1vw"
+					fill="#15FFFC"
+				></rect>
+			</svg>
+		</div>
+		<div id="final-container">
+			<img src="./images/id-card.svg" id="id-card" alt="" />
+			<img src="./images/final-container.svg" id="screen" alt="" />
+			<div id="final-text">
+				<h3 style="font-weight: 400">Flag + other stuff</h3>
+			</div>
+		</div>
+	</body>
+</html>
