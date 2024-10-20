@@ -1,5 +1,0 @@
-# app/requirements.txt
-# note: luka if you're editing this, make sure the Flask and werkzeug versions are compatible with each other! I had to explicitly define them here to make it work :)
-Flask==2.0.1
-werkzeug==2.0.3
-mysql-connector-python==8.0.26
