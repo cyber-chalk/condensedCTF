@@ -8,5 +8,12 @@ to destroy
 
 UML Diagrams:
 
-Backend-Activity
+Backend-Activity-Diagram
 ![Backend-Activity](https://live.staticflickr.com/65535/54080177760_cae4160c63_b.jpg)
+
+
+Sequence-Diagram
+
+
+
+![Sequence](https://live.staticflickr.com/65535/54082103295_521efd36d6_b.jpg)
