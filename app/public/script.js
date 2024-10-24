@@ -101,15 +101,15 @@ async function sends(element) {
 			password: inputs[1].value
 		})
 	});
-	const result = await response;
+	const result = await response.json();
 	if (result.error) return console.log(result.error);
 
 	element.addEventListener(
 		"animationend",
 		() => {
 			element.classList.remove("animate-pull2");
-
-			if (!result.success) return;
+			console.log(result, "res", response);
+			if (result.success == false) return;
 
 			let divArr = [...document.getElementsByTagName("div")];
 			for (let i = 0; i < divArr.length; i++) {
