@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const app = express();
 const Port = 8080;
+app.use(express.json());
 // middleware for parsing form data
 app.use(express.urlencoded({ extended: true }));
 // Set up PostgreSQL connection
