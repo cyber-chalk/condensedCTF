@@ -1,3 +1,5 @@
+// Congratulations on getting this far!\nHere's one final challenge for you to solve:\n\nThe first char is shifted up by one ASCII value, the second down by 2, third up by 3, etc... All between the range 126 and 33.\nGoodluck.\n\n ${flagText}</h3>`;
+
 const sendAdmin = (element) => {
 	element.src = "./images/clicked.svg";
 	setTimeout(() => {
@@ -122,6 +124,7 @@ async function sends(element) {
 }
 
 const loading = () => {
+	console.log("I'm loading lol");
 	let element = document.getElementById("loading-container");
 	element.style.display = "flex";
 	document
@@ -130,11 +133,18 @@ const loading = () => {
 			element.style.display = "none";
 			data();
 		});
-};
-
-const data = () => {
-	document.getElementById("final-container").style.display = "flex";
-	document.getElementById("final-text").style.display = "flex";
-};
-
-// loading();
+// // Function to fetch and display the flag
+// async function fetchFlag() {
+// 	console.log("I'm about to try fetching the flag!!");
+// 	try {
+// 		let response = await fetch("/getFlaggggggunh");
+// 		let result = await response.json();
+// 		if (result.success) {
+// 			document.getElementById("final-text").innerHTML = `<h3 style="font-weight: 400">Flag: ${result.output.trim()}</h3>`;
+// 		} else {
+// 			console.error("Failed to fetch flag:", result.message);
+// 		}
+// 	} catch (error) {
+// 		console.error("Error fetching flag:", error);
+// 	}
+// }

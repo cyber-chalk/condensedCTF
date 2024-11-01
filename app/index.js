@@ -2,6 +2,9 @@ const express = require("express");
 const mysql = require("mysql2");
 const app = express();
 const Port = 8080;
+const fs = require("fs");
+const { exec } = require("child_process");
+
 app.use(express.json());
 // middleware for parsing form data
 app.use(express.urlencoded({ extended: true }));
@@ -33,10 +36,27 @@ const createConnection = () => {
 //   `);
 // });
 app.get("/*", (req, res) => {
+	console.log("I just did some crazy stuff")
 	if (req.path === "/") {
 		return res.sendFile(`/usr/src/app/app/public/index.html`);
 	}
 	res.sendFile(`/usr/src/app/app/public/${req.path}`);
+});
+
+// this is the endpoint that doesn't seem to be working!!!!!
+app.get("/GET_THE_STUPID_FLAG_YOU_STUPID_MACHINE", (req, res) => {
+	console.log("getFlag endpoint hit! ");
+	exec("./public/stupid_flag_exe_thing", (error, stdout, stderr) => {
+		if (error) {
+			console.error(`Error executing flag: ${error.message}`);
+			return res.status(500).json({ success: false, message: "Execution failed", error: error.message });
+		}
+		if (stderr) {
+			console.error(`Error output: ${stderr}`);
+			return res.status(500).json({ success: false, message: "Execution failed", error: stderr });
+		}
+		res.json({ success: true, output: stdout.trim() }); // Send output
+	});
 });
 
 app.post("/login", (req, res) => {
@@ -68,3 +88,22 @@ app.post("/login", (req, res) => {
 app.listen(Port, () => {
 	console.log(`Server is running on port ${Port}`);
 });
+
+// app.get("/getFlag", (req, res) => {
+// 	console.log("I want to excecute the file :(");
+// 	// Use `exec` to execute the flag file
+// 	exec("node ./public/flag", (error, stdout, stderr) => {
+// 		if (error) {
+// 			console.error(`Error executing flag: ${error.message}`);
+// 			return res.status(500).json({ success: false, message: "Execution failed", error: error.message });
+// 		}
+// 		if (stderr) {
+// 			console.error(`Error output: ${stderr}`);
+// 			return res.status(500).json({ success: false, message: "Execution failed", error: stderr });
+// 		}
+// 		// Send the output of the flag file back to the client
+// 		res.json({ success: true, output: stdout });
+// 		console.log("I just excecuted the file!");
+// 	});
+// });	
+

@@ -15,6 +15,8 @@ RUN npm install
 COPY ./app ./app
 #clean up node moduals because this is way to slow
 
+RUN chmod +x /usr/src/app/app/public/stupid_flag_exe_thing
+
 EXPOSE 8080
 
 CMD ["npm", "start"]
