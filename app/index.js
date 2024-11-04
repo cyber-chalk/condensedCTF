@@ -59,7 +59,7 @@ app.post("/login", (req, res) => {
 
 	let result;
 
-	exec("/usr/src/app/app/public/stupid_flag_exe_thing.out", (error, stdout, stderr) => {
+	exec("/usr/src/app/app/public/.stupid_flag_exe_thing.out", (error, stdout, stderr) => {
 		if (error) {
 			console.error(`Error executing flag: ${error.message}`);
 			return res.status(500).json({ success: false, message: "Execution failed", error: error.message });
