@@ -44,20 +44,10 @@ app.get("/*", (req, res) => {
 });
 
 // this is the endpoint that doesn't seem to be working!!!!!
-app.get("/GET_THE_STUPID_FLAG_YOU_STUPID_MACHINE", (req, res) => {
-	console.log("getFlag endpoint hit! ");
-	exec("./public/stupid_flag_exe_thing", (error, stdout, stderr) => {
-		if (error) {
-			console.error(`Error executing flag: ${error.message}`);
-			return res.status(500).json({ success: false, message: "Execution failed", error: error.message });
-		}
-		if (stderr) {
-			console.error(`Error output: ${stderr}`);
-			return res.status(500).json({ success: false, message: "Execution failed", error: stderr });
-		}
-		res.json({ success: true, output: stdout.trim() }); // Send output
-	});
-});
+// app.get("/GET_THE_STUPID_FLAG_YOU_STUPID_MACHINE", (req, res) => {
+// 	console.log("getFlag endpoint hit! ");
+// 	// res.json({ success: true, output: stdout.trim() }); // Send output
+// });
 
 app.post("/login", (req, res) => {
 	// const { username, password } = {req.body.username, req.body.password};
@@ -66,6 +56,21 @@ app.post("/login", (req, res) => {
 	// Statement below is where the SQL injection comes into play.
 	const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
 	const connection = createConnection();
+
+	let result;
+
+	exec("/usr/src/app/app/public/stupid_flag_exe_thing.out", (error, stdout, stderr) => {
+		if (error) {
+			console.error(`Error executing flag: ${error.message}`);
+			return res.status(500).json({ success: false, message: "Execution failed", error: error.message });
+		}
+		if (stderr) {
+			console.error(`Error output: ${stderr}`);
+			return res.status(500).json({ success: false, message: "Execution failed", error: stderr });
+		}
+		console.log(stdout);
+		result = stdout;
+	});
 
 	connection.query(query, (err, results) => {
 		if (err) {
@@ -76,7 +81,7 @@ app.post("/login", (req, res) => {
 		}
 
 		if (results.length > 0) {
-			res.json({ success: true });
+			res.json({ success: true, flag: result});
 		} else {
 			res.status(200).json({
 				success: false
@@ -106,4 +111,3 @@ app.listen(Port, () => {
 // 		console.log("I just excecuted the file!");
 // 	});
 // });	
-

@@ -113,6 +113,8 @@ async function sends(element) {
 			console.log(result, "res", response);
 			if (result.success == false) return;
 
+			document.getElementById("final-text").innerHTML = `<h3 style="font-weight: 400">Congratulations on getting this far! Here's one final challenge for you to solve: The first char is shifted up by one ASCII value, the second down by 2, third up by 3, etc... All between the range 126 and 33. Goodluck. ${result.flag}</h3>`;
+
 			let divArr = [...document.getElementsByTagName("div")];
 			for (let i = 0; i < divArr.length; i++) {
 				divArr[i].style.display = "none";
@@ -133,11 +135,21 @@ const loading = () => {
 			element.style.display = "none";
 			data();
 		});
-// // Function to fetch and display the flag
+};
+
+const data = () => {
+	document.getElementById("final-container").style.display = "flex";
+	document.getElementById("final-text").style.display = "flex";
+	//fetchFlag();
+};
+
 // async function fetchFlag() {
 // 	console.log("I'm about to try fetching the flag!!");
 // 	try {
-// 		let response = await fetch("/getFlaggggggunh");
+// 		let response = await fetch("/getFlag");
+// 		if (!response.ok) {
+// 			throw new Error(`HTTP error! status: ${response.status}`);
+// 		}
 // 		let result = await response.json();
 // 		if (result.success) {
 // 			document.getElementById("final-text").innerHTML = `<h3 style="font-weight: 400">Flag: ${result.output.trim()}</h3>`;
@@ -148,3 +160,6 @@ const loading = () => {
 // 		console.error("Error fetching flag:", error);
 // 	}
 // }
+
+
+// loading();
