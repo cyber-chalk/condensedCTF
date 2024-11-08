@@ -1,5 +1,4 @@
 # condensedCTF
-Gorg + condensed123 working out their ctf Progect!! :)
 
 to run (currently) 
 `docker-compose up --build`
