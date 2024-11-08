@@ -54,7 +54,7 @@ app.post("/login", (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 	// Statement below is where the SQL injection comes into play.
-	const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+	const query = `SELECT * FROM users WHERE username = '${username}' AND password =												 '${password}'`;
 	const connection = createConnection();
 
 	let result;

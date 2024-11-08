@@ -1,25 +1,25 @@
 #include <stdio.h>
 
 int main() {
-	char input[] = "Good Job! you solved the cipher. Here's the flag: [condencedCTF(SOLVED)]";
+	char input[] = "Good_Job_you_solved_the_cipher._Here's_the_flag:_[condencedCTF(SOLVED)]";
 	int inputLen = 0;
 	
 	while(input[inputLen] != '\0') {
 		inputLen++;
 	}
 	
-	for(int i = 0; i < inputLen; i++) {
+	for(int i = 1; i <= inputLen; i++) {
 		if(i % 2 == 0) {
-			if(input[i] + i <= 126) {
-				input[i] += i;
+			if(input[i-1] + i < 126) {
+				input[i-1] += i;
 			} else {
-				input[i] = (input[i] + i - 126) + 32;
+				input[i-1] = (input[i-1] + i - 126) + 33;
 			}
 		} else {
-			if(input[i] - i >= 33) {
-				input[i] -= i;
+			if(input[i-1] - i > 33) {
+				input[i-1] -= i;
 			} else {
-				input[i] = (input[i] - i + 126) - 33;
+				input[i-1] = (input[i-1] - i + 126) - 33;
 			}
 		}
 	}
