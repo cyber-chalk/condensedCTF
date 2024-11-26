@@ -1,7 +1,7 @@
 # condensedCTF
 
 to run (currently) 
-install npm packages
+install npm packages, then
 `docker-compose up --build`
 to destroy
 `docker-compose down --volumes` dont have to include --volumes tag if you plan on not changing the files inside the container, also Do Not do it everytime you close a container
